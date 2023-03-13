@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>JWt</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
+              </li>
+            </ul>
+            <% if(!user){ %>
+              <a type="button" href="/login" class="btn btn-primary me-2">Log In</a>
+              <a type="button" href="/singup" class="btn btn-success">Sing Up</a>
+            <% }else{ %>
+              <a type="button" href="/logout" class="btn btn-success">Log Out</a>
+            <% } %>
+          </div>
+        </div>
+      </nav>
+
+
+
+
+
+
+
+     <style>
+#notifai {
+  display: flex;
+  float: right;
+  position: fixed;
+  right: 0;
+  z-index: 10;
+  transition: all 5s ease-in-out;
+}
+#notifai .alert {
+  color: white;
+  width: 24rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.4rem;
+  padding: 0.3rem;
+  text-align: center;
+  box-shadow: 5px 5px 12px gray;
+  border-radius: 15px;
+}
+#notifai .alert #notifai_close {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+#notifai .alert-danger {
+  background-color: red;
+}
+#notifai .alert-success {
+  background-color: green;
+}
+#notifai .alert-primary {
+  background-color: skyblue;
+}
+
+
+     </style> 
+
+      <div class="notifai" id="notifai">
+        <!-- <div class="alert alert-danger notifai_body" role="alert">
+          <h6>Success</h6>
+          <a id="notifai_close"> <i class="material-icons prefix">close</i></a>
+        </div> -->
+      
+        <% if(msg){ %>
+          <% if(msg.type==="error" ){ %>
+            <div class="alert alert-danger notifai_body" role="alert" >
+              <h6><%= msg.message %></h6>
+              <a id="notifai_close"> <i class="material-icons prefix">close</i></a>
+            </div>
+            <% }else if(msg.type==="done" ){ %>
+              <div class="alert alert-success notifai_body" role="alert" >
+                <h6><%= msg.message %></h6>
+                <a id="notifai_close"> <i class="material-icons prefix">close</i></a>        
+              </div>
+              <% }else if(msg.type==="info" ){ %>
+                <h6><%= msg.message %></h6>
+                <a id="notifai_close"> <i class="material-icons prefix">close</i></a>
+                <div class="alert alert-primary notifai_body" role="alert" >
+      
+                </div>
+                <% }} %>
+      
+      </div>
+      
+      <script>
+        // Notifaction 
+        const notifaiTimeout = document.getElementById("notifai")
+        setTimeout(() => {
+          notifaiTimeout.style.display = "none"
+        }, 4000);
+        document.getElementById("notifai_close").addEventListener("click", () => {
+          notifaiTimeout.style.display = "none"
+        })
+      </script>
+
